@@ -1,3 +1,51 @@
+database: aiqibill
+---------------------billType----------------------------------------------------
+CREATE TABLE IF NOT EXISTS public."billType"
+(
+    id integer NOT NULL DEFAULT nextval('"billType_id_seq"'::regclass),
+    title text COLLATE pg_catalog."default",
+    CONSTRAINT "billType_pkey" PRIMARY KEY (id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public."billType"
+    OWNER to postgres;
+
+---------------------SSUser----------------------------------------------------
+CREATE TABLE IF NOT EXISTS public."SSUser"
+(
+    id integer NOT NULL DEFAULT nextval('"SSUser_id_seq"'::regclass),
+    email text COLLATE pg_catalog."default",
+    name text COLLATE pg_catalog."default",
+    password text COLLATE pg_catalog."default",
+    CONSTRAINT "SSUser_pkey" PRIMARY KEY (id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public."SSUser"
+    OWNER to postgres;
+
+---------------------bill----------------------------------------------------
+CREATE TABLE IF NOT EXISTS public.bill
+(
+    id integer NOT NULL DEFAULT nextval('bill_id_seq'::regclass),
+    "BillDate" date,
+    "BillType" integer,
+    "BillMoney" text COLLATE pg_catalog."default",
+    "BillRemark" text COLLATE pg_catalog."default",
+    userid integer,
+    joined date NOT NULL DEFAULT date(timezone('UTC-8'::text, now())),
+    CONSTRAINT bill_pkey PRIMARY KEY (id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public.bill
+    OWNER to postgres;
+
+
 爱琦记新版本 v1.0.1 版本 开发需求：
 ------------------------------------------------------
 1：标记当前记录账单的人 用颜色底色来区分， 账号登录业务 
